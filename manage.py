@@ -13,7 +13,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def seed():
-    print("seed test")
+    os.system('python ./data/seed_file.py')
 
 if __name__ == '__main__':
     manager.run()
