@@ -45,4 +45,37 @@ class Items(db.Model):
             db.DateTime, default=db.func.current_timestamp(),
             onupdate=db.func.current_timestamp())
 
+class Invoices(db.Model):
+    __tablename__ = 'invoices'
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
+    merchant_id = db.Column(db.Integer, db.ForeignKey('merchants.id'))
+    status = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(
+            db.DateTime, default=db.func.current_timestamp(),
+            onupdate=db.func.current_timestamp())
 
+class Transactions(db.Model):
+    __tablename__ = 'transactions'
+    id = db.Column(db.Integer, primary_key=True)
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoices.id'))
+    credit_card_number = db.Column(db.Text)
+    credit_card_expiration_date = db.Column(db.Text)
+    result = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(
+            db.DateTime, default=db.func.current_timestamp(),
+            onupdate=db.func.current_timestamp())
+
+class InvoiceItems(db.Model):
+    __tablename__ = 'invoice_items'
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, db.ForeignKey('items.id'))
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoices.id'))
+    quantity = db.Column(db.Integer)
+    unit_price = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(
+            db.DateTime, default=db.func.current_timestamp(),
+            onupdate=db.func.current_timestamp())
