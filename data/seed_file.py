@@ -1,6 +1,6 @@
 import psycopg2
 
-conn = psycopg2.connect('DATABASE_URL')
+conn = psycopg2.connect('DB_SEED')
 
 merchants_file = open('./data/merchants.csv')
 customers_file = open('./data/customers.csv')
