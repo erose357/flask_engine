@@ -8,11 +8,11 @@ name = "pypi"
 [packages]
 
 flask = "*"
-flask-sqlalchemy = "*"
+Flask-SQLAlchemy = "*"
 "psycopg2" = "*"
-flask-migrate = "*"
-flask-api = "*"
-flask-script = "*"
+Flask-Migrate = "*"
+Flask-API = "*"
+Flask-Script = "*"
 gunicorn = "*"
 
 
