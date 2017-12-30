@@ -1,4 +1,5 @@
 from app import db
+from  sqlalchemy.sql.expression import func
 
 class Merchants(db.Model):
     __tablename__ = 'merchants'
@@ -12,6 +13,12 @@ class Merchants(db.Model):
     @staticmethod
     def get_all():
         return Merchants.query.all()
+
+    def get_one(id):
+        return Merchants.query.filter_by(id=id).first()
+
+    def get_random():
+        return Merchants.query.order_by(func.random()).first()
 
     def __repr__(self):
         return "<Merchant: {}>".format(self.name)

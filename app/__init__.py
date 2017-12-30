@@ -14,6 +14,28 @@ def create_app(config_name):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
+    @app.route('/api/v1/merchants/<int:id>', methods=['GET'])
+    def one_merchant(id):
+        merchant = Merchants.get_one(id)
+        results = {
+                'id': merchant.id,
+                'name': merchant.name
+        }
+        response = jsonify(results)
+        response.status_code = 200
+        return response
+
+    @app.route('/api/v1/merchants/random', methods=['GET'])
+    def get_random_merchant():
+        merchant = Merchants.get_random()
+        results = {
+                'id': merchant.id,
+                'name': merchant.name
+        }
+        response = jsonify(results)
+        response.status_code = 200
+        return response
+
     @app.route('/api/v1/merchants', methods=['GET'])
     def all_merchants():
         merchants = Merchants.get_all()
