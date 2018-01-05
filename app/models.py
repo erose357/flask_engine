@@ -9,16 +9,21 @@ class Merchants(db.Model):
     updated_at = db.Column(
             db.DateTime, default=db.func.current_timestamp(),
             onupdate=db.func.current_timestamp())
+    items = db.relationship('Items', backref='merchant', lazy='dynamic')
 
     @staticmethod
     def get_all():
         return Merchants.query.all()
 
-    def get_one(id):
-        return Merchants.query.filter_by(id=id).first()
+    def get_one(merchant_id):
+        return Merchants.query.filter_by(id=merchant_id).first()
 
     def get_random():
         return Merchants.query.order_by(func.random()).first()
+
+    def get_items(merchant_id):
+        merchant = Merchants.query.filter_by(id=merchant_id).first() 
+        return merchant.items.all()
 
     def __repr__(self):
         return "<Merchant: {}>".format(self.name)
