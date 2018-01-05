@@ -16,6 +16,31 @@ def create_app(config_name):
     CORS(app)
     db.init_app(app)
 
+    @app.route('/api/v1/merchants/<int:id>/items', methods=['GET'])
+    def get_merchant_items(id):
+        merchant = Merchants.get_one(id)
+        items = Merchants.get_items(id)
+        merchant_items = []
+
+        for item in items:
+            obj = {
+                    'id': item.id,
+                    'name': item.name,
+                    'description': item.description,
+                    'unit_price': item.unit_price
+                }
+            merchant_items.append(obj)
+
+        results = {
+                'id': merchant.id,
+                'name': merchant.name,
+                'items': merchant_items
+            }
+
+        response = jsonify(results)
+        response.status_code = 200
+        return response
+
     @app.route('/api/v1/merchants/<int:id>', methods=['GET'])
     def one_merchant(id):
         merchant = Merchants.get_one(id)
