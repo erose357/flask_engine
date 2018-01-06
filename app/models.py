@@ -10,6 +10,7 @@ class Merchants(db.Model):
             db.DateTime, default=db.func.current_timestamp(),
             onupdate=db.func.current_timestamp())
     items = db.relationship('Items', backref='merchant', lazy='dynamic')
+    invoices = db.relationship('Invoices', backref='merchant', lazy='dynamic')
 
     @staticmethod
     def get_all():
@@ -24,6 +25,10 @@ class Merchants(db.Model):
     def get_items(merchant_id):
         merchant = Merchants.query.filter_by(id=merchant_id).first() 
         return merchant.items.all()
+
+    def get_invoices(merchant_id):
+        merchant = Merchants.get_one(merchant_id)
+        return merchant.invoices.all()
 
     def __repr__(self):
         return "<Merchant: {}>".format(self.name)
