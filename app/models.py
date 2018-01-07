@@ -83,6 +83,10 @@ class Invoices(db.Model):
     updated_at = db.Column(
             db.DateTime, default=db.func.current_timestamp(),
             onupdate=db.func.current_timestamp())
+    transactions = db.relationship('Transactions', backref="invoice", lazy='dynamic')
+
+    def __repr__(self):
+        return '<Invoice: id=%r, customer_id=%r, merchant_id=%r, status=%r transactions=%r>' % (self.id, self.customer_id, self.merchant_id, self.status, self.transactions)
 
 class Transactions(db.Model):
     __tablename__ = 'transactions'
@@ -95,6 +99,9 @@ class Transactions(db.Model):
     updated_at = db.Column(
             db.DateTime, default=db.func.current_timestamp(),
             onupdate=db.func.current_timestamp())
+
+    def __repr__(self):
+        return '<Transaction: id=%r, invoice_id=%r, result=%r>' % (self.id, self.invoice_id, self.result)
 
 class InvoiceItems(db.Model):
     __tablename__ = 'invoice_items'
