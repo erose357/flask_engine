@@ -2,6 +2,7 @@ from flask_api import FlaskAPI
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask import request, jsonify, abort
+from flask import render_template
 
 from instance.config import app_config
 
@@ -118,5 +119,9 @@ def create_app(config_name):
         response = jsonify(results)
         response.status_code = 200
         return response
+
+    @app.route('/', methods=['GET'])
+    def root():
+        return render_template('index.html')
 
     return app
