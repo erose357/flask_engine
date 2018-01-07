@@ -1,15 +1,17 @@
 # Flask Engine
-Flask Engine is the Turing School's Rales Engine project written in Python.  It is an API returning JSON from the [SalesEngine](https://github.com/turingschool-examples/sales_engine/tree/master/data) data set.  
+Flask Engine is the Turing School's [Rales Engine](http://backend.turing.io/module3/projects/rails_engine) project written in Python.  It is an API returning JSON from the [SalesEngine](https://github.com/turingschool-examples/sales_engine/tree/master/data) data set.  
 
 ## Getting Started
 
 ### Versions
 Python 3.6.4  
-Flask 0.12.2
+Flask 0.12.2  
 Postgresql 9.6.3
 
 ### Prerequisites
-[Pipenv](https://github.com/pypa/pipenv)
+[Python3](http://docs.python-guide.org/en/latest/starting/installation/)  
+[Pipenv](https://github.com/pypa/pipenv)  
+[Postgresql](https://www.postgresql.org/)  
 
 ### Setup
 #### Database setup:    
@@ -21,15 +23,20 @@ CREATE DATABASE
 \q
 ```
 #### App Setup/Installation:  
-clone down the repo:  
-`$ git clone git@github.com:erose357/flask_engine.git`  
-`$ cd flask_engine`  
+clone down the repo and `cd` into the directory:  
+```
+$ git clone git@github.com:erose357/flask_engine.git
+$ cd flask_engine
+```
 install dependencies:  
 `$ pipenv install`   
+
 set the following environment variables(MacOS):  
-`$ export FLASK_APP=run.py`  
-`$ export APP_SETTINGS=development`
-`$ export DATABASE_URL=<YOUR_DB_PATH>`
+```
+$ export FLASK_APP=run.py
+$ export APP_SETTINGS=development
+$ export DATABASE_URL=<YOUR_DB_PATH>
+```
 activate the virtual environment:  
 ```
 $ pipenv shell
