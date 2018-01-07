@@ -54,6 +54,10 @@ class Customers(db.Model):
     def get_random():
         return Customers.query.order_by(func.random()).first()
 
+    def get_invoices(customer_id):
+        customer = Customers.get_one(customer_id)
+        return customer.invoices.all()
+
     def __repr__(self):
         return '<Customer: id=%r, first_name=%r, last_name=%r>' % (self.id, self.first_name, self.last_name)
 
