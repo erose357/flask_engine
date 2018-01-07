@@ -47,6 +47,9 @@ class Customers(db.Model):
     def get_all():
         return Customers.query.all()
 
+    def get_one(customer_id):
+        return Customers.query.filter_by(id=customer_id).first()
+
     def __repr__(self):
         return "<Customers: {}>".format(self.name)
 
