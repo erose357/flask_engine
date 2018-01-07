@@ -23,7 +23,7 @@ CREATE DATABASE
 \q
 ```
 #### App Setup/Installation:  
-clone down the repo and `cd` into the directory:  
+clone the repo and `cd` into the directory:  
 ```
 $ git clone git@github.com:erose357/flask_engine.git
 $ cd flask_engine
