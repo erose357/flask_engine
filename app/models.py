@@ -50,6 +50,9 @@ class Customers(db.Model):
     def get_one(customer_id):
         return Customers.query.filter_by(id=customer_id).first()
 
+    def get_random():
+        return Customers.query.order_by(func.random()).first()
+
     def __repr__(self):
         return "<Customers: {}>".format(self.name)
 

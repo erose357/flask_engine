@@ -90,6 +90,18 @@ def create_app(config_name):
         response.status_code = 200
         return response
 
+    @app.route('/api/v1/customers/random', methods=['GET'])
+    def get_random_customer():
+        customer = Customers.get_random()
+        results = {
+                'id': customer.id,
+                'first_name': customer.first_name,
+                'last_name': customer.last_name
+        }
+        response = jsonify(results)
+        response.status_code = 200
+        return response
+
     @app.route('/api/v1/merchants/random', methods=['GET'])
     def get_random_merchant():
         merchant = Merchants.get_random()
