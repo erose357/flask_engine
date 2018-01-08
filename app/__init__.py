@@ -68,6 +68,31 @@ def create_app(config_name):
         response.status_code = 200
         return response
 
+    @app.route('/api/v1/customers/<int:id>/transactions', methods=['GET'])
+    def get_customer_transactions(id):
+        customer = Customers.get_one(id)
+        transactions = Customers.get_transactions(id)
+        customer_transactions = []
+
+        for transaction in transactions:
+            obj = {
+                    'id': transaction.id,
+                    'invoice_id': transaction.invoice_id,
+                    'result': transaction.result
+                }
+            customer_transactions.append(obj)
+
+            results = {
+                    'id': customer.id,
+                    'first_name': customer.first_name,
+                    'last_name': customer.last_name,
+                    'transactions': customer_transactions
+                }
+
+            response = jsonify(results)
+            response.status_code = 200
+            return response
+
     @app.route('/api/v1/merchants/<int:id>/items', methods=['GET'])
     def get_merchant_items(id):
         merchant = Merchants.get_one(id)

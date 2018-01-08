@@ -58,6 +58,9 @@ class Customers(db.Model):
         customer = Customers.get_one(customer_id)
         return customer.invoices.all()
 
+    def get_transactions(customer_id):
+        return Invoices.query.filter_by(customer_id = customer_id).first().transactions.all()
+
     def __repr__(self):
         return '<Customer: id=%r, first_name=%r, last_name=%r>' % (self.id, self.first_name, self.last_name)
 
